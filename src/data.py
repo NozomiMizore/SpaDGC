@@ -43,13 +43,19 @@ class Load10xAdata:
     def load_label(self):
         """
         Load ground truth spatial domain labels from truth.txt file.
-        
+
+        Matches labels to spots by barcode to handle ordering differences
+        between truth.txt and the h5 feature matrix.
+
         Optionally filters out spots with missing labels based on filter_na setting.
         """
         df_meta = pd.read_csv(os.path.join(self.path, 'truth.txt'), sep='\t', header=None)
-        df_meta_layer = df_meta[1]
+        df_meta.columns = ['barcode', 'ground_truth']
+        df_meta = df_meta.set_index('barcode')
 
-        self.adata.obs['ground_truth'] = df_meta_layer.values
+        # Match labels to adata spots by barcode
+        adata_barcodes = self.adata.obs_names
+        self.adata.obs['ground_truth'] = adata_barcodes.map(df_meta['ground_truth']).values
 
         # Filter out spots with missing labels if requested
         if self.filter_na:
