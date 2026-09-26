@@ -1,4 +1,5 @@
 # SpaDGC: A Dynamic Graph Contrastive Learning Framework for Spatial Transcriptomics Analysis
+The official implementation of the paper **"Zhiwen Xu, Haoang Chi, Xiaoming Yan, Tao Yang, Juan Chen, Chengkun Wu, and Liyang Xu. SpaDGC: A Dynamic Graph Contrastive Learning Framework for Spatial Transcriptomics Analysis"** (Accepted by BIBM 2026). 
 
 SpaDGC is a self-supervised dynamic graph contrastive learning framework for spatial transcriptomics (ST) analysis. It learns spot representations through a **graph autoencoder (GAE)** — a GCN encoder paired with a **zero-inflated negative binomial (ZINB)** decoder — trained with **dual-scale contrastive learning** and a **dynamic graph updating (DGU)** strategy that iteratively refines the adjacency graph to sharpen domain boundaries and capture long-range intra-domain dependencies.
 
